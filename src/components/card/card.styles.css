@@ -1,0 +1,35 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #68a0a0;
+  border-radius: 10px;
+  border: 1px solid grey;
+  padding: 25px;
+  cursor: pointer;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+  box-shadow: 5px 5px 10px;
+  opacity: 40%;
+}
+
+.card-container:hover {
+  transform: scale(1.05);
+  opacity: 100%;
+  transition: 0.3s ease-in-out;
+}
+
+h2 {
+  font-family: "Bigelow Rules";
+  font-size: 32px;
+  color: #3b7473;
+  text-shadow: 1px 1px 0px #399693;
+}
+
+p {
+  font-family: "Bigelow Rules";
+  font-size: 25px;
+  color: #275b5a;
+  text-shadow: 1px 1px 0px #399693;
+}

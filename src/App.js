@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
+
+import { CardList } from "./components/card-list/card-list.component";
+import { SearchBox } from "./components/search-box/search-box.component";
 
 function App() {
+  const [monsters, setMonsters] = useState([]);
+  const [searchField, setSearchField] = useState("");
+
+  const filterdMonsters = monsters.filter((monster) =>
+    monster.name.toLowerCase().includes(searchField.toLowerCase())
+  );
+
+  const handleChange = useCallback((e) => {
+    setSearchField(e.target.value);
+  }, []);
+
+  const monstersGroup = async () => {
+    await axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((res) => {
+        const DATA = res.data;
+        setMonsters(DATA);
+      });
+  };
+
+  useEffect(() => {
+    monstersGroup();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1 className="monsters-neon">Monsters Rolodex</h1>
+      <SearchBox handleChange={handleChange} />
+      <CardList monsters={filterdMonsters} />
     </div>
   );
 }
